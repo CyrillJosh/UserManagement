@@ -5,7 +5,7 @@
     ViewData["Title"] = "Uer Management";
 }
 
-@model List<Person>
+@* @model List<Person> *@
 
 <div class="container">
     <!--HEADER-->
@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(var person in Model)
+@*                 @foreach(var person in Model)
                 {
                     <tr>
                         <td>@person.User.Id</td>
@@ -45,7 +45,7 @@
                             <a href="#!" class="DeleteModalButton btn btn-Danger">Delete</a>
                         </td>
                     </tr>
-                }
+                } *@
             </tbody>
         </table>
     </div>

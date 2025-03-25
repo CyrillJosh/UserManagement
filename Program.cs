@@ -1,7 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using Odato_UserManagement.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<MyDBContext>(options =>
+    options
+        .UseSqlServer(builder.Configuration.GetSection("ConnectionStrings:Default").Value,
+            sql => sql.EnableRetryOnFailure())
+        .EnableSensitiveDataLogging(),
+    ServiceLifetime.Transient
+);
 
 var app = builder.Build();
 

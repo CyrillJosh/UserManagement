@@ -5,7 +5,7 @@
     ViewData["Title"] = "Uer Management";
 }
 
-@* @model List<Person> *@
+@model List<Person>
 
 <div class="container">
     <!--HEADER-->
@@ -30,22 +30,22 @@
                 </tr>
             </thead>
             <tbody>
-@*                 @foreach(var person in Model)
+                @foreach(var person in Model)
                 {
                     <tr>
                         <td>@person.User.Id</td>
-                        <td>@person.Lastname @person.Firstname</td>
+                        <td>@person.Lastname, @person.Firstname</td>
                         <td>@person.Email</td>
-                        <td>@person.Username</td>
-                        <td>@person.Password</td>
+                        <td>@person.User.Username</td>
+                        <td>@person.User.Password</td>
                         <td>@person.DateCreated</td>
                         <td>@(person.DateUpdated is null ? "-" : person.DateUpdated)</td>
                         <td>
-                            <a href="#!" class="EditModalButton btn btn-primary" data-bs-toggle="modal" data-bs-target="#UpdateModal">Update</a>
-                            <a href="#!" class="DeleteModalButton btn btn-Danger">Delete</a>
+                            <a href="#!" data-id="@person.Id" class= "EditModalButton btn btn-primary" data-bs-toggle="modal" data-bs-target="#UpdateModal">Update</a>
+                            <a href="#!" data-id="@person.Id" class="DeleteModalButton btn btn-Danger" data-bs-toggle="modal" data-bs-target="#DeleteModal">Delete</a>
                         </td>
                     </tr>
-                } *@
+                }
             </tbody>
         </table>
     </div>
@@ -59,7 +59,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="UpdatePartialZone">
-                    ...
                 </div>
             </div>
         </div>
@@ -67,7 +66,7 @@
 
 
     <!-- DeleteModal -->
-    <div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="DeleteModal" aria-hidden="true">
+    <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="DeleteModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -89,13 +88,13 @@
 @section Scripts
 {
     <script>
-        $('.EditModalButton').click(function (){
+        $('.EditModalButton').click(function () {
             let id = $(this).data("id");
 
-            $('#UpdatePartialZone').load('User/UpdatePartial/${id}');
+            $('#UpdatePartialZone').load('User/Update/' + id);
         })
 
-        $('.DeletModalButton').click(function (){
+        $('.DeleteModalButton').click(function () {
             let id = $(this).data("id");
 
             $('#ConfirmDelete').data("id", id);
@@ -105,7 +104,7 @@
             let id = $(this).data("id");
 
             $.ajax({
-                url: '/User/DeleteProcess/${id}',
+                url: '/User/Delete/' + id,
                 Type: "DELETE",
                 success: function(response){
                     if(response.success){

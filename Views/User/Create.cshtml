@@ -12,11 +12,17 @@
         <h2>Create new User</h2>
         <p class="lead">Please provide the user information</p>
     </div>
-    <div class="row g-3">
-        <form method="post" asp-controller="User" asp-action="CreateProcess" class="has-validation" novalidate>
+    <form method="post" asp-controller="User" asp-action="CreateProcess" class="has-validation" novalidate>
+        <div class="row g-3">
             <div class="col-6">
                 <label class="form-label" asp-for="Firstname">FirstName</label>
                 <input class="form-control" asp-for="Firstname" type="text" required />
+                <div class="valid-feedback">
+                    Great!
+                </div>
+                <div class="invalid-feedback">
+                    oof!
+                </div>
             </div>
             <div class="col-6">
                 <label class="form-label" asp-for="Lastname">FirstName</label>
@@ -34,10 +40,10 @@
                 </div>
             </div>
             <div class="col-6">
-                <label class="form-label" asp-for="User.Password">Username</label>
+                <label class="form-label" asp-for="User.Password">Password</label>
                 <input class="form-control" asp-for="User.Password" type="password" required />
             </div>
-            <button class="btn btn-success" type="submit">Create</button>
-        </form>
-    </div>
+            <button class="btn btn-success col-12 my-5" type="submit">Create</button>
+        </div>
+    </form>
 </div>

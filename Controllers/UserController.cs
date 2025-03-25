@@ -30,6 +30,12 @@ namespace Odato_UserManagement.Controllers
         //CreateProcess
         public IActionResult CreateProcess(Person person)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+
             person.DateCreated = DateTime.Now;
 
             _context.People.Add(person);

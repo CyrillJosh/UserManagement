@@ -7,8 +7,17 @@
 @model Person
 
 <div class="container">
+    <div>
+        <h2>Create new User</h2>
+        <p class="lead">Please provide the user information</p>
+    </div>
     <div class="row g-3">
         <form method="post" asp-controller="User" asp-action="CreateProcess" class="has-validation" novalidate>
+            <!-- HIDDEN -->
+            <input asp-for="Id" hidden/>
+            <input asp-for="DateCreated" hidden/>
+            <input asp-for="User.Id" hidden/>
+
             <div class="col-6">
                 <label class="form-label" asp-for="Firstname">FirstName</label>
                 <input class="form-control" asp-for="Firstname" type="text" required />

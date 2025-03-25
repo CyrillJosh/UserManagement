@@ -16,12 +16,23 @@ namespace Odato_UserManagement.Controllers
         //Index
         public IActionResult Index()
         {
-            return View();
+            List<Person> people = _context.People.Include(p => p.User).ToList();
+            return View(people);
         }
         //Create
         public IActionResult Create()
         {
             return View();
+        }
+        //CreateProcess
+        public IActionResult CreateProcess(Person person)
+        {
+            person.DateCreated = DateTime.Now;
+
+            _context.People.Add(person);
+            _context.SaveChanges();
+            
+            return RedirectToAction("Index");
         }
     }
 }

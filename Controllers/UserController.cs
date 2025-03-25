@@ -31,8 +31,37 @@ namespace Odato_UserManagement.Controllers
 
             _context.People.Add(person);
             _context.SaveChanges();
-            
+
             return RedirectToAction("Index");
+        }
+        //Update
+        public IActionResult UpdatePartial(int id)
+        {
+            Person person = _context.People.Include(p => p.User).FirstOrDefault(x => x.Id == id);
+
+            return PartialView(person);
+        }
+        //Update Process
+        public IActionResult UpdateProcess(Person person)
+        {
+            person.DateUpdated = DateTime.Now;
+
+            _context.Update(person);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        //Delete Process
+        public IActionResult DeleteProcess(int id)
+        {
+            Person person = _context.People.Include(p => p.User).FirstOrDefault(x => x.Id == id);
+
+            if(person is null) return Json(new { success = false, message = "Error! Record not found please try again"});
+
+            _context.Remove(person);
+            _context.SaveChanges();
+
+            Json(new { success = true, message = "Record successfully removed!"});
         }
     }
 }

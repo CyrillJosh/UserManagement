@@ -1,0 +1,42 @@
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Uer Management";
+}
+
+@model Person
+
+<div class="row g-3">
+    <form method="post" asp-controller="User" asp-action="UpdateProcess" class="has-validation" novalidate>
+        <!-- HIDDEN -->
+        <input asp-for="Id" hidden/>
+        <input asp-for="DateCreated" hidden/>
+        <input asp-for="User.Id" hidden/>
+
+        <div class="col-6">
+            <label class="form-label" asp-for="Firstname">FirstName</label>
+            <input class="form-control" asp-for="Firstname" type="text" required />
+        </div>
+        <div class="col-6">
+            <label class="form-label" asp-for="Lastname">FirstName</label>
+            <input class="form-control" asp-for="Lastname" type="text" required />
+        </div>
+        <div class="col-12">
+            <label class="form-label" asp-for="Email">Email</label>
+            <input class="form-control" asp-for="Email" type="email" placeholder="my@email.com" required />
+        </div>
+        <div class="col-6">
+            <label class="form-label" asp-for="User.Username">Username</label>
+            <div class="input-group">
+                <span class="input-group-text">@</span>
+                <input class="form-control" asp-for="User.Username" type="text" required />
+            </div>
+        </div>
+        <div class="col-6">
+            <label class="form-label" asp-for="User.Password">Username</label>
+            <input class="form-control" asp-for="User.Password" type="password" required />
+        </div>
+        <button class="btn btn-success" type="submit">Update</button>
+    </form>
+</div>

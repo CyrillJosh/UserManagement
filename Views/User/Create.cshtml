@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Create User";
 }
+
 @model Person
 
 <div class="container">
@@ -13,11 +14,6 @@
     </div>
     <div class="row g-3">
         <form method="post" asp-controller="User" asp-action="CreateProcess" class="has-validation" novalidate>
-            <!-- HIDDEN -->
-            <input asp-for="Id" hidden/>
-            <input asp-for="DateCreated" hidden/>
-            <input asp-for="User.Id" hidden/>
-
             <div class="col-6">
                 <label class="form-label" asp-for="Firstname">FirstName</label>
                 <input class="form-control" asp-for="Firstname" type="text" required />

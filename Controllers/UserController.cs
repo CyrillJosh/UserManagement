@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Odato_UserManagement.Context;
 using Odato_UserManagement.Models;
 
@@ -23,18 +24,15 @@ namespace Odato_UserManagement.Controllers
             return View(people);
         }
         //Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
         //CreateProcess
-        public IActionResult CreateProcess(Person person)
+        public IActionResult Create(Person person)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
+            if(!ModelState.IsValid) return View(person);
 
             person.DateCreated = DateTime.Now;
 

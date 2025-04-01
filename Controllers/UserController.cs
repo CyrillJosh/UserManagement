@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Odato_UserManagement.Context;
@@ -42,6 +43,7 @@ namespace Odato_UserManagement.Controllers
             return RedirectToAction("Index");
         }
         //Update
+        [HttpGet]
         public IActionResult Update(int id)
         {
             Person person = _context.People.Include(p => p.User).FirstOrDefault(x => x.Id == id);
@@ -51,6 +53,13 @@ namespace Odato_UserManagement.Controllers
         //Update Process
         public IActionResult UpdateProcess(Person person)
         {
+            //ERROR PA
+            //NEED DEBUGGING
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Update", new {id = person.Id});
+            }
+
             person.DateUpdated = DateTime.Now;
 
             _context.Update(person);

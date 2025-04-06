@@ -41,27 +41,13 @@
                         <td>@person.DateCreated</td>
                         <td>@(person.DateUpdated is null ? "-" : person.DateUpdated)</td>
                         <td>
-                            <a href="#!" data-id="@person.Id" class= "EditModalButton btn btn-primary" data-bs-toggle="modal" data-bs-target="#UpdateModal">Update</a>
-                            <a href="#!" data-id="@person.Id" class="DeleteModalButton btn btn-Danger" data-bs-toggle="modal" data-bs-target="#DeleteModal">Delete</a>
+                            <a href="/User/Update/@person.Id" class="btn btn-primary">Update</a>
+                            <a href="#!" data-id="@person.Id" class="DeleteModalButton btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal">Delete</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-    </div>
-
-    <!-- UpdateModal -->
-    <div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="UpdateModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="UpdatePartialZone">
-                </div>
-            </div>
-        </div>
     </div>
 
 
@@ -88,12 +74,6 @@
 @section Scripts
 {
     <script>
-        $('.EditModalButton').click(function () {
-            let id = $(this).data("id");
-
-            $('#UpdatePartialZone').load('User/Update/' + id);
-        })
-
         $('.DeleteModalButton').click(function () {
             let id = $(this).data("id");
 

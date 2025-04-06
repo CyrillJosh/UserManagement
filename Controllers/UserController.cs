@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Odato_UserManagement.Context;
 using Odato_UserManagement.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Odato_UserManagement.Controllers
 {
@@ -30,6 +32,7 @@ namespace Odato_UserManagement.Controllers
         {
             return View();
         }
+
         //CreateProcess
         public IActionResult Create(Person person)
         {
@@ -48,18 +51,17 @@ namespace Odato_UserManagement.Controllers
         {
             Person person = _context.People.Include(p => p.User).FirstOrDefault(x => x.Id == id);
 
-            return PartialView(person);
+            return View(person);
         }
         //Update Process
-        public IActionResult UpdateProcess(Person person)
+        public IActionResult Update(Person person)
         {
-            //ERROR PA
-            //NEED DEBUGGING
+            //Validate
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Update", new {id = person.Id});
+                return View(person);
             }
-
+   
             person.DateUpdated = DateTime.Now;
 
             _context.Update(person);
@@ -79,5 +81,17 @@ namespace Odato_UserManagement.Controllers
 
             return Json(new { success = true, message = "Record successfully removed!" });
         }
+
+        //Test incryption
+
+        //private byte[] CalculateSHA256(string str)
+        //{
+        //    SHA256 sha256 = SHA256Managed.Create();
+        //    byte[] hashValue;
+        //    UTF8Encoding objUtf8 = new UTF8Encoding();
+        //    hashValue = sha256.ComputeHash(objUtf8.GetBytes(str));
+
+        //    return hashValue;
+        //}
     }
 }
